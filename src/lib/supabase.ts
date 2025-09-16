@@ -3,6 +3,10 @@ import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 
+if (!supabaseUrl || !supabaseAnonKey) {
+  throw new Error("As variáveis de ambiente VITE_SUPABASE_URL e VITE_SUPABASE_ANON_KEY são obrigatórias.")
+}
+
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
 export type Database = {
@@ -87,6 +91,32 @@ export type Database = {
           effort_score?: number | null
           created_at?: string
           completed_at?: string | null
+        }
+      }
+      ai_conversations: {
+        Row: {
+          id: string
+          user_id: string
+          title: string
+          messages: { sender: 'user' | 'ai'; content: string }[]
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          title: string
+          messages: { sender: 'user' | 'ai'; content: string }[]
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          title?: string
+          messages?: { sender: 'user' | 'ai'; content: string }[]
+          created_at?: string
+          updated_at?: string
         }
       }
     }

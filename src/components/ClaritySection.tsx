@@ -1,10 +1,11 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { Tab } from '@headlessui/react'
-import { Sparkles, BrainCircuit, Edit, Search } from 'lucide-react'
+import { Sparkles, BrainCircuit, Edit, Search, MessageSquare } from 'lucide-react'
 import GuidedReflection from './clarity/GuidedReflection'
 import BrainDump from './clarity/BrainDump'
 import ValueDiscovery from './clarity/ValueDiscovery'
+import ChatIA from './clarity/ChatIA'
 
 function classNames(...classes: (string | boolean)[]) {
   return classes.filter(Boolean).join(' ')
@@ -12,6 +13,7 @@ function classNames(...classes: (string | boolean)[]) {
 
 export default function ClaritySection() {
   const tabs = [
+    { name: 'Chat com IA', icon: MessageSquare, component: <ChatIA /> },
     { name: 'Reflexão Guiada', icon: BrainCircuit, component: <GuidedReflection /> },
     { name: 'Organizador de Pensamentos', icon: Edit, component: <BrainDump /> },
     { name: 'Descoberta de Valores', icon: Search, component: <ValueDiscovery /> },
@@ -55,7 +57,7 @@ export default function ClaritySection() {
             <Tab.Panel
               key={idx}
               className={classNames(
-                'rounded-xl bg-card border border-border p-3',
+                'rounded-xl bg-card border border-border p-0', // Changed padding to 0
                 'focus:outline-none'
               )}
             >
